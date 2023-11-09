@@ -5,8 +5,6 @@ let btnConsulCaracteristic = document.getElementById("btnConsulCaracteristic");
 let btnConsulDistri = document.getElementById("btnConsulDistri");
 let btnConsulProv = document.getElementById("btnConsulProv");
 let enviar = document.getElementById("enviar");
-// let url = "http://localhost:3000/consultaPropietario";
-
 
 
 async function consultaPropietario() {
@@ -79,27 +77,23 @@ async function consultaProveedor() {
 
 
 async function agregarPropietario() {
-  let nombre = document.getElementById("nombre_propietario").value;
+  let nombre_propietario = document.getElementById("nombre_propietario").value;
   let celular = document.getElementById("celular").value;
   let correo = document.getElementById("correo").value;
-  let contraseña = document.getElementById("contraseña").value;
+  let pass = document.getElementById("pass").value;
   let objetoEnviar = {
-    nombre,
+    nombre_propietario,
     celular,
     correo,
-    contraseña,
+    pass,
   };
-  let res = await fetch("http://backendprojet-production.up.railway.app/agregarPropietario",
-    {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(objetoEnviar),
-    }
-  );
-  let result = await res.json();
-  console.log(result);
+  let res = await fetch("http://backendprojet-production.up.railway.app/agregarPropietario",{
+    method: "POST",
+    headers: {"Content-type": "application/json"},
+    body: JSON.stringify(objetoEnviar)
+  });
+  let resultado = await res.json();
 }
-
 
 
 
