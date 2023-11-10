@@ -6,7 +6,6 @@ let btnConsulDistri = document.getElementById("btnConsulDistri");
 let btnConsulProv = document.getElementById("btnConsulProv");
 let enviar = document.getElementById("enviar");
 
-
 async function consultaPropietario() {
   let contenedor = document.getElementById("contenedor");
   let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
@@ -72,9 +71,6 @@ async function consultaProveedor() {
     <button onclick = "borrarProveedor(${proveedor.id_proveedor})">Eliminar registro</button>`;
   });
 }
-
-
-
 
 async function agregarPropietario() {
   let nombre_propietario = document.getElementById("nombre_propietario").value;

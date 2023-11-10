@@ -1,33 +1,28 @@
-let emailInput = document.getElementById("emailInput");
-let passInput = document.getElementById("passInput");
-const btn_login = document.getElementById("btn_login");
-let infoCorreo = "";
-let infoContra = "";
+async function consultaUsuario(correo, contraseña) {
+  try {
+    const resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
 
-async function consultaUsuario() {
-  let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
-  let resul = await resultado.json();
-  resul.forEach((propietario) => {
-    infoCorreo += `${propietario.correo}`;
-    infoContra += `${propietario.contraseña}`;
-  });
-  console.log(infoCorreo);
-  console.log(infoContra);
-}
+    const usuarios = await resultado.json()
 
-function captura(event) {
-  event.preventDefault();
-  let email = emailInput.value;
-  let pass = passInput.value;
-  console.log(email, pass);
-  console.log(infoCorreo);
-  if (email !== infoCorreo){
-    console.log("No existe");
-  }
-  else {
-    console.log("Correcto");
+    for (const usuario of usuarios) {
+      const usuarioEncontrado = usuario.correo === correo && usuario.contraseña === contraseña;
+
+      if (usuarioEncontrado) {
+        window.location.href = './home.html'
+      } else {
+        console.log('Información incorrecta');
+      }
+    }
+  } catch (error) {
+    console.error(error);
   }
 }
 
-consultaUsuario();
-btn_login.addEventListener("click", captura);
+document.getElementById("btn_login").addEventListener("click", (e) => {
+  e.preventDefault()
+
+  const correo = document.getElementById("email-input").value;
+  const contraseña = document.getElementById("pass-input").value;
+
+  consultaUsuario(correo, contraseña)
+});
