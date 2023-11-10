@@ -1,28 +1,42 @@
+const correoInput = document.getElementById("email-input");
+const contraseñaInput = document.getElementById("pass-input");
+const btnLogin = document.getElementById("btn_login");
+
+correoInput.addEventListener("input", validarFormulario);
+contraseñaInput.addEventListener("input", validarFormulario);
+
 async function consultaUsuario(correo, contraseña) {
   try {
     const resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
+    const usuarios = await resultado.json();
 
-    const usuarios = await resultado.json()
+    const usuarioEncontrado = usuarios.some(usuario => usuario.correo === correo && usuario.contraseña === contraseña);
 
-    for (const usuario of usuarios) {
-      const usuarioEncontrado = usuario.correo === correo && usuario.contraseña === contraseña;
-
-      if (usuarioEncontrado) {
-        window.location.href = './home.html'
-      } else {
-        console.log('Información incorrecta');
-      }
+    if (usuarioEncontrado) {
+      window.location.href = './home.html';
+    } else {
+      console.log('Información incorrecta');
     }
   } catch (error) {
     console.error(error);
   }
 }
 
-document.getElementById("btn_login").addEventListener("click", (e) => {
-  e.preventDefault()
+function validarFormulario() {
+  const correo = correoInput.value.trim();
+  const contraseña = contraseñaInput.value.trim();
+  btnLogin.disabled = correo === "" || contraseña === "";
+}
 
-  const correo = document.getElementById("email-input").value;
-  const contraseña = document.getElementById("pass-input").value;
+btnLogin.addEventListener("click", (e) => {
+  e.preventDefault();
 
-  consultaUsuario(correo, contraseña)
+  const correo = correoInput.value;
+  const contraseña = contraseñaInput.value;
+
+  if (correo.trim() !== "" && contraseña.trim() !== "") {
+    consultaUsuario(correo, contraseña);
+  } else {
+    console.log('Por favor, complete ambos campos.');
+  }
 });

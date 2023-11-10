@@ -21,16 +21,15 @@
       <form id="login-form">
         <div>
           <label for="email-input" class="form-label">Email</label>
-          <input type="text" class="form-control" id="email-input" aria-describedby="emailHelp" />
+          <input type="text" required  class="form-control" id="email-input" aria-describedby="emailHelp"/>
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div>
           <label for="pass-input" class="form-label">Password</label>
-          <input type="password" class="form-control" id="pass-input" />
+          <input type="password" required class="form-control" id="pass-input" />
         </div>
-        <button type="submit" id="btn_login" class="btn btn-primary">Ingresar</button>
+        <button type="submit" id="btn_login" class="btn btn-primary" disabled >Ingresar</button>
       </form>
-      <button onclick="consultaUsuario()" >CLICK</button>
     </main>
     <footer>
         <!-- <img src="./images/fabicon1.png" alt="Cow titulo"/> -->
