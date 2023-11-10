@@ -1,27 +1,33 @@
-const email_input = document.getElementById("emailInput");
-const pass_input = document.getElementById("passInput");
-const btnLogin = document.getElementById("btn-login");
+let emailInput = document.getElementById("emailInput");
+let passInput = document.getElementById("passInput");
+const btn_login = document.getElementById("btn_login");
+let infoCorreo = "";
+let infoContra = "";
 
-const users = [
-  { name: "Mali", password: "123", balance: 200 },
-  { name: "Gera", password: "456", balance: 290 },
-  { name: "Maui", password: "789", balance: 67 },
-];
+async function consultaUsuario() {
+  let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
+  let resul = await resultado.json();
+  resul.forEach((propietario) => {
+    infoCorreo += `${propietario.correo}`;
+    infoContra += `${propietario.contraseña}`;
+  });
+  console.log(infoCorreo);
+  console.log(infoContra);
+}
 
-
-btnLogin.addEventListener("click", function (event) {
+function captura(event) {
   event.preventDefault();
-  let email = email_input.value;
-  let pass = pass_input.value;
+  let email = emailInput.value;
+  let pass = passInput.value;
+  console.log(email, pass);
+  console.log(infoCorreo);
+  if (email !== infoCorreo){
+    console.log("No existe");
+  }
+  else {
+    console.log("Correcto");
+  }
+}
 
-  let loggedUser = users.find(user => user.name === email && user.password === pass)
-  if(loggedUser)
-  {
-    localStorage.setItem("loggedUser", JSON.stringify(loggedUser));// java script object notation JSON
-    window.location.href = "./home.html";
-  }
-  else
-  {
-    alert("Usuario o contraseña Incorrectos");
-  }
-});
+consultaUsuario();
+btn_login.addEventListener("click", captura);
