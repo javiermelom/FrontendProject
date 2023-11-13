@@ -1,12 +1,15 @@
+const API_URL = "https://backendprojet-production.up.railway.app"
+
 const correoInput = document.getElementById("email-input");
 const contraseñaInput = document.getElementById("pass-input");
 const btnLogin = document.getElementById("btn_login");
 correoInput.addEventListener("input", validarFormulario);
 contraseñaInput.addEventListener("input", validarFormulario);
 
+
 async function consultaUsuario(correo, contraseña) {
   try {
-    const resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
+    const resultado = await fetch(`${API_URL}/consultaPropietarios`);
     const usuarios = await resultado.json();
     console.log('AQUÍ ESTA LA DATA', usuarios)
     // TRUE OR FALSE
