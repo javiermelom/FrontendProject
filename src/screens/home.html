@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/home.css" />
+    <link rel="stylesheet" href="../../styles/home.css" />
     <link rel="shortcut icon" href="./images/Fabicon1.png" type="image/x-icon" />
     <link
       rel="stylesheet"
@@ -16,14 +16,14 @@
   </head>
   <body>
     <header>
-      <img src="./images/cow5.jpeg" alt="Cow titulo"/>
+      <img src="../assets/images/cow5.jpeg" alt="Cow titulo"/>
       <div class="titulo">FARM</div>
       <div class="titul">&</div>
       <div class="titulo">LAND</div>
     </header>
     <main>
       <div class="botones">
-        <button class="boton" id="btnConsulProp"><i class="fa-solid fa-user-tie fa-2xl"></i>  Consulta Propietarios</button>
+        <button class="boton" id="btn-prop"><i class="fa-solid fa-user-tie fa-2xl"></i>  Consulta Propietarios</button>
         <button class="boton" id="btnConsulGranja"><i class="fa-solid fa-house-chimney fa-2xl"></i>  Consulta Granjas</button>
         <button class="boton" id="btnConsulGanado"><i class="fa-solid fa-cow fa-2xl"></i>  Consulta Ganado</button>
         <button class="boton" id="btnConsulCaracteristic"><i class="fa-solid fa-bars fa-2xl"></i>  Cons. Caracteristicas_ganado</button>
@@ -34,24 +34,13 @@
       <br>
       <br>
       <video width="640" height="360" autoplay loop>
-        <source src="./images/1057571065-preview.mp4" type="video/mp4">
       </video>
-      <div>
-        <br strong />Crear usuario<br />
-        <label for="nombre_propietario">Nombre</label>
-        <input type="text" name="nombre_propietario" id="nombre_propietario"/><br />
-        <label for="celular_propietario">Celular</label>
-        <input type="text" name="celular" id="celular" /><br />
-        <label for="correo">Correo</label>
-        <input type="text" name="correo" id="correo" /><br />
-        <label for="pass">Password</label>
-        <input type="text" name="pass" id="pass" /><br />
-        <button id="enviar">Enviar</button>
-      </div>
+      <button id="get-user" >Get User</button>
+      <button id="log-out" >Cerrar sesión</button>
     </main>
     <footer>
       FARM&LAND
     </footer>
   </body>
-  <script src="./controllers/home.js"></script>
+  <script type="module" src="../../controllers/home.js"></script>
 </html>
