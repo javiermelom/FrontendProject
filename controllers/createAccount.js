@@ -1,5 +1,5 @@
+const API_URL = "https://backendprojet-production.up.railway.app"
 let enviar = document.getElementById("btn-create").addEventListener("click", agregarPropietario);
-
 
 
 async function agregarPropietario() {
@@ -27,7 +27,7 @@ async function agregarPropietario() {
             console.log("Usuario creado");
             setTimeout(() => {
                 window.location.href = "../home.html"
-            }, 1000);
+            }, 500);
         }
         else if (resultado === 400) {
             console.log("Informacion no valida");

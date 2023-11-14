@@ -24,15 +24,9 @@ if (userCookie) {
   let btnConsulProv = document.getElementById("btnConsulProv").addEventListener("click", consultaProveedor);
 
   async function model(route) {
-    // let contenedor = document.getElementById("contenedor");
     let resultado = await fetch(route);
     let resultadojson = await resultado.json();
     return resultadojson
-    // contenedor.innerHTML = "";
-    // resultadojson.forEach((propietario) => {
-    //   contenedor.innerHTML += `<br>${propietario.idpropietario}${")"} ${propietario.nombre_propietario}${", cel:"}${propietario.celular}
-    //   <button onclick = "borrarPropietario(${propietario.idpropietario})">Eliminar registro</button>`;
-    // });
   }
 
   async function consultaPropietario() {
@@ -46,12 +40,23 @@ if (userCookie) {
     // console.log(userCookie);
   }
 
+  // async function consultaPropietario() {
+  //   let contenedor = document.getElementById("contenedor");
+  //   let resultado = await fetch (`${API_URL}/consultaPropietario/${userCookie}`);
+  //   let resultadojson = await resultado.json();
+  //   console.log(resultadojson);
+  //   contenedor.innerHTML = "";
+  //   resultadojson.forEach((propietario) => {
+  //     contenedor.innerHTML += `<br>${propietario.idpropietario}${")"} ${propietario.nombre_propietario}${", cel:"}${propietario.celular}
+  //     <button onclick = "borrarPropietario(${propietario.idpropietario})">Eliminar registro</button>`;
+  //   });
+  // }
+
   async function consultaGranja() {
     let contenedor = document.getElementById("contenedor");
     let resultado = await fetch(`${API_URL}/granjaPropietario/${userCookie}`);
     let resultadojson = await resultado.json();
     console.log(resultadojson);
-
     contenedor.innerHTML = "";
     resultadojson.forEach((granja) => {
       contenedor.innerHTML += `<br>${granja.idgranja}${")"} ${granja.nombre} ${"- Ubicada en el Municipio de:"} ${granja.municipio}
@@ -59,14 +64,26 @@ if (userCookie) {
     });
   }
 
+  // async function consultaGanado() {
+  //   let contenedor = document.getElementById("contenedor");
+  //   let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaGanado");
+  //   let resultadojson = await resultado.json();
+  //   contenedor.innerHTML = "";
+  //   resultadojson.forEach((ganado) => {
+  //     contenedor.innerHTML += `<br>${ganado.idganado} ${")"} ${ganado.nombre} ${"Numero Registro:"} ${ganado.num_registro}
+  //     <button onclick = "borrarGanado(${ganado.idganado})">Eliminar registro</button>`;
+  //   });
+  // }
+
   async function consultaGanado() {
     let contenedor = document.getElementById("contenedor");
-    let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaGanado");
+    let resultado = await fetch(`${API_URL}/ganadoGranja/${userCookie}`);
     let resultadojson = await resultado.json();
+    console.log(resultadojson);
     contenedor.innerHTML = "";
     resultadojson.forEach((ganado) => {
-      contenedor.innerHTML += `<br>${ganado.idganado} ${")"} ${ganado.nombre} ${"Numero Registro:"} ${ganado.num_registro}
-      <button onclick = "borrarGanado(${ganado.idganado})">Eliminar registro</button>`;
+      contenedor.innerHTML += `<br>${ganado.idganado} ${")"} ${ganado.nombre} ${"Numero Registro:"} ${ganado.num_registro}`;
+      // <button onclick = "borrarGanado(${ganado.idganado})">Eliminar registro</button>`;
     });
   }
 
@@ -76,11 +93,22 @@ if (userCookie) {
     let resultadojson = await resultado.json();
     contenedor.innerHTML = "";
     resultadojson.forEach((caracteristicas) => {
-      contenedor.innerHTML += `<br>${caracteristicas.idcaracteristicas_ganado} ${")"} ${caracteristicas.raza} ${"peso:"} ${caracteristicas.peso}
-      <button onclick = "borrarCaracteristicas_ganado(${caracteristicas.idcaracteristicas_ganado})">Eliminar registro</button>`;
+      contenedor.innerHTML += `<br>${caracteristicas.idcaracteristicas_ganado} ${")"} ${caracteristicas.raza} ${"peso:"} ${caracteristicas.pesokg}${"Kg"}`;
+      // <button onclick = "borrarCaracteristicas_ganado(${caracteristicas.idcaracteristicas_ganado})">Eliminar registro</button>`;
     });
   }
 
+  // async function consultaCaracteristicas_ganado() {
+  //   let contenedor = document.getElementById("contenedor");
+  //   let resultado = await fetch(`${API_URL}/caracteristicasGanado/${userCookie}`);
+  //   let resultadojson = await resultado.json();
+  //   console.log(resultadojson);
+  //   contenedor.innerHTML = "";
+  //   resultadojson.forEach((caracteristicas) => {
+  //     contenedor.innerHTML += `<br>${caracteristicas.idcaracteristicas_ganado} ${")"} ${caracteristicas.raza} ${"peso:"} ${caracteristicas.pesokg}${"Kg"}
+  //     <button onclick = "borrarCaracteristicas_ganado(${caracteristicas.idganado})">Eliminar registro</button>`;
+  //   });
+  // }
   async function consultaDistribucion() {
     let contenedor = document.getElementById("contenedor");
     let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaDistribucion");
@@ -149,7 +177,7 @@ if (userCookie) {
   }
 
 
-  
+
 } else {
   window.location.href = "../index.html"
 }
