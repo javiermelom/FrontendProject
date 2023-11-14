@@ -4,12 +4,11 @@ const deleteCookie = document.getElementById('log-out').addEventListener('click'
 function cerrarSesion() {
   userCookie = undefined  
   localStorage.removeItem('User')
-  window.location.href = "../../index.html"
+  window.location.href = "../index.html"
 }
 
 if (userCookie) {
   document.getElementById("get-user").addEventListener("click", getUser);
-
   // Solo para verificar ID usuario
   async function getUser() {
     console.log(userCookie)
@@ -25,10 +24,9 @@ if (userCookie) {
   let btnConsulProv = document.getElementById("btnConsulProv").addEventListener("click", consultaProveedor);
 
   async function model(route) {
-    let contenedor = document.getElementById("contenedor");
+    // let contenedor = document.getElementById("contenedor");
     let resultado = await fetch(route);
     let resultadojson = await resultado.json();
-
     return resultadojson
     // contenedor.innerHTML = "";
     // resultadojson.forEach((propietario) => {
@@ -53,11 +51,12 @@ if (userCookie) {
     let resultado = await fetch(`${API_URL}/granjaPropietario/${userCookie}`);
     let resultadojson = await resultado.json();
     console.log(resultadojson);
-    // contenedor.innerHTML = "";
-    // resultadojson.forEach((granja) => {
-    //   contenedor.innerHTML += `<br>${granja.idgranja}${")"} ${granja.nombre} ${"- Ubicada en el Municipio de:"} ${granja.municipio}
-    //   <button onclick = "borrarGranja(${granja.idpropietario})">Eliminar registro</button>`;
-    // });
+
+    contenedor.innerHTML = "";
+    resultadojson.forEach((granja) => {
+      contenedor.innerHTML += `<br>${granja.idgranja}${")"} ${granja.nombre} ${"- Ubicada en el Municipio de:"} ${granja.municipio}
+      <button onclick = "borrarGranja(${granja.idpropietario})">Eliminar registro</button>`;
+    });
   }
 
   async function consultaGanado() {
@@ -104,6 +103,8 @@ if (userCookie) {
     });
   }
 
+
+
   async function borrarPropietario(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarPropietario/${id}`,
     {
@@ -111,7 +112,6 @@ if (userCookie) {
     });
     let result = await res.json();
   }
-
   async function borrarGranja(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarGranja/${id}`,
     {
@@ -119,7 +119,6 @@ if (userCookie) {
     });
     let result = await res.json();
   }
-
   async function borrarGanado(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarGanado/${id}`,
     {
@@ -127,7 +126,6 @@ if (userCookie) {
     });
     let result = await res.json();
   }
-
   async function borrarCaracteristicas_ganado(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarCaracteristicas_ganado/${id}`,
     {
@@ -135,7 +133,6 @@ if (userCookie) {
     });
     let result = await res.json();
   }
-
   async function borrarDistribucion(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarDistribucion/${id}`,
     {
@@ -143,7 +140,6 @@ if (userCookie) {
     });
     let result = await res.json();
   }
-
   async function borrarProveedor(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarProveedor/${id}`,
     {
@@ -152,6 +148,8 @@ if (userCookie) {
     let result = await res.json();
   }
 
+
+  
 } else {
-  window.location.href = "../../index.html"
+  window.location.href = "../index.html"
 }

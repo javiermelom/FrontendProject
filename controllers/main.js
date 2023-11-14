@@ -7,11 +7,12 @@ correoInput.addEventListener("input", validarFormulario);
 contraseñaInput.addEventListener("input", validarFormulario);
 
 
+
 async function consultaUsuario(correo, contraseña) {
   try {
     const resultado = await fetch(`${API_URL}/consultaPropietarios`);
     const usuarios = await resultado.json();
-    console.log('AQUÍ ESTA LA DATA', usuarios)
+    console.log("AQUÍ ESTA LA DATA", usuarios);
     // TRUE OR FALSE
     const usuarioEncontrado = usuarios.find(usuario => usuario.correo === correo && usuario.contraseña === contraseña);
     if (usuarioEncontrado) {
@@ -24,11 +25,17 @@ async function consultaUsuario(correo, contraseña) {
     console.error(error);
   }
 }
+
+
+
 function validarFormulario() {
   const correo = correoInput.value.trim();
   const contraseña = contraseñaInput.value.trim();
   btnLogin.disabled = correo === "" || contraseña === "";
 }
+
+
+
 btnLogin.addEventListener("click", (e) => {
   e.preventDefault();
   const correo = correoInput.value;

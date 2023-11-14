@@ -1,5 +1,7 @@
 let enviar = document.getElementById("btn-create").addEventListener("click", agregarPropietario);
 
+
+
 async function agregarPropietario() {
     try {
         let nombre_propietario = document.getElementById("nombre_propietario").value;
@@ -12,15 +14,14 @@ async function agregarPropietario() {
           correo,
           pass,
         };
-        let res = await fetch(
-          "http://backendprojet-production.up.railway.app/agregarPropietario",
+        let res = await fetch("http://backendprojet-production.up.railway.app/agregarPropietario",
           {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(objetoEnviar),
           }
         );
-        const resultado = await res.status;
+        const resultado = res.status;
         console.log(resultado);
         if (resultado === 200) {
             console.log("Usuario creado");
