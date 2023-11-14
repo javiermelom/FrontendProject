@@ -38,30 +38,26 @@ if (userCookie) {
   }
 
   async function consultaPropietario() {
-    const usuarioSesion = model(`${API_URL}/consultaPropietario`)
-
+    const usuarioSesion = model(`${API_URL}/consultaPropietario/${userCookie}`)
     usuarioSesion
-      .then((res) => {
-        const usuarioEncontrado = res.find(usuario => usuario.idpropietario === userCookie)
-
-        if(usuarioEncontrado) {
-          console.log(usuarioEncontrado)
-        } else {
-          console.log("Sin ID")
-        }
+      .then(res=>{
+        console.log(res)
+        console.log(res.idpropietario);
       })
       .catch(err => console.error(err))
+    // console.log(userCookie);
   }
 
   async function consultaGranja() {
     let contenedor = document.getElementById("contenedor");
-    let resultado = await fetch("https://backendprojet-production.up.railway.app/consultaGranja");
+    let resultado = await fetch(`${API_URL}/granjaPropietario/${userCookie}`);
     let resultadojson = await resultado.json();
-    contenedor.innerHTML = "";
-    resultadojson.forEach((granja) => {
-      contenedor.innerHTML += `<br>${granja.idgranja}${")"} ${granja.nombre} ${"- Ubicada en el Municipio de:"} ${granja.municipio}
-      <button onclick = "borrarGranja(${granja.idpropietario})">Eliminar registro</button>`;
-    });
+    console.log(resultadojson);
+    // contenedor.innerHTML = "";
+    // resultadojson.forEach((granja) => {
+    //   contenedor.innerHTML += `<br>${granja.idgranja}${")"} ${granja.nombre} ${"- Ubicada en el Municipio de:"} ${granja.municipio}
+    //   <button onclick = "borrarGranja(${granja.idpropietario})">Eliminar registro</button>`;
+    // });
   }
 
   async function consultaGanado() {
@@ -107,27 +103,6 @@ if (userCookie) {
       <button onclick = "borrarProveedor(${proveedor.id_proveedor})">Eliminar registro</button>`;
     });
   }
-
-  async function agregarPropietario() {
-    let nombre_propietario = document.getElementById("nombre_propietario").value;
-    let celular = document.getElementById("celular").value;
-    let correo = document.getElementById("correo").value;
-    let pass = document.getElementById("pass").value;
-    let objetoEnviar = {
-      nombre_propietario,
-      celular,
-      correo,
-      pass,
-    };
-    let res = await fetch("http://backendprojet-production.up.railway.app/agregarPropietario",{
-      method: "POST",
-      headers: {"Content-type": "application/json"},
-      body: JSON.stringify(objetoEnviar)
-    });
-    let resultado = await res.json();
-  }
-
-
 
   async function borrarPropietario(id) {
     let res = await fetch(`http://backendprojet-production.up.railway.app/borrarPropietario/${id}`,

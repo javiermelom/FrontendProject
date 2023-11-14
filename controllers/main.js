@@ -16,7 +16,7 @@ async function consultaUsuario(correo, contraseña) {
     const usuarioEncontrado = usuarios.find(usuario => usuario.correo === correo && usuario.contraseña === contraseña);
     if (usuarioEncontrado) {
       localStorage.setItem('User', JSON.stringify(usuarioEncontrado.idpropietario))
-      window.location.href = '../src/screens/home.html';
+      window.location.href = '../home.html';
     } else {
       console.log('Información incorrecta');
     }

@@ -54,6 +54,12 @@ main {
   -moz-box-shadow: 29px 10px 28px -2px rgba(0, 0, 0, 0.64);
   border-radius: 15px;
 }
+
+video {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
 footer {
   display: flex;
   justify-content: center;
