@@ -9,6 +9,7 @@ async function consultaUsuario(correo, contraseña) {
   try {
     const resultado = await fetch("https://backendprojet-production.up.railway.app/consultaPropietario");
     const usuarios = await resultado.json();
+    console.log("Data api", usuarios);
 
     const usuarioEncontrado = usuarios.some(usuario => usuario.correo === correo && usuario.contraseña === contraseña);
 
